@@ -9,11 +9,13 @@ reqirements for an administered Python test:
 
 Create a functional test suite for a simple REST API. The API stores quotes, and allows for retrieval, lookup, addition, and removal.
 
-The test suite is to be created with Python 3.6 or newer, pytest, and requests.
+The test suite is to be created with Python 3.6 or newer, using pytest and requests.
 
-The solution is to be contained entirely in a single python file (test_quotes_api.py).
+The solution is to be contained entirely in a _single_ python file (test_quotes_api.py).
 
 A `bugs_found.txt` file has been included containing a terse description of bugs found to date from test output.
+
+Note: the examples given below are assuming python 3.6+ is installed in an Ubuntu environment.
 
 
 ## Prerequisites
