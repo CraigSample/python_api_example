@@ -1,0 +1,30 @@
+A few bugs were found while testing.
+
+When executed, the test_quotes_api.py script will fail on 5 test cases.
+
+These failures include:
+1) For GET /quotes, the output is not sorted numerically, but alphabetically.
+   Requirement: Output data is sorted by id.
+>       assert sorted_keys_from_server == keys_from_server
+E       assert [1, 2, 3, 4, 5, 6, ...] == [1, 10, 11, 12, 13, 14, ...]
+E         At index 1 diff: 2 != 10
+
+2) For POST /quotes, when a value is missing for text (ex: payload of '{"text": }'), a 500 is thrown instead of a 400.
+   Requirement: Rejects (with HTTP code 400) objects missing the text field, and
+                when the text field is not a string, e.g. {}  and  {"text": 123}
+>       assert response_status_code == 400
+E       assert 500 == 400
+
+3) For POST /quotes, only a max of 18 entries are supported, and a 500 is thrown. See line 339 of quotes_server.py.
+        Requirement: Storing at least 20 quotes is supported.
+>       assert passed_response.status_code == expected_status, "Expected: {} actual: {}. Response error: {}".format(
+            expected_status, passed_response.status_code, _get_key_value_from_response(passed_response, 'error'))
+E       AssertionError: Expected: 201 actual: 500. Response error: Unhandled error
+
+4) 5) With PUT /quotes and DELETE /quotes (MethodNotAllowed) the expected return code was 405. Instead a 501 is returned
+   and the response was in HTML format from the server instead of the expected JSON format.
+   There were no formal requirements for these tests, so further MethodNotAllowed tests were not conducted.
+    <p>Error code: 501</p> <p>Message: Unsupported method ('PUT').</p>
+    <p>Error code explanation: HTTPStatus.NOT_IMPLEMENTED - Server does not support this operation.</p>
+
+

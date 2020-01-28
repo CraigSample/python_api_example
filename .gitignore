@@ -1,0 +1,21 @@
+*.iml
+.installed.cfg
+*.egg-info
+
+## Directory-based project format:
+.idea/
+.idea_modules/
+.git/
+.pytest_cache/
+.eggs/
+
+## File-based project format:
+*.ipr
+*.iws
+
+# Byte-compiled / optimized / DLL files
+*/__pycache__/
+*.py[cod]
+
+staticfiles
+.env
